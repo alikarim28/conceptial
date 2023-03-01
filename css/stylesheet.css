@@ -498,3 +498,12 @@ h2{
 }
 .text-center{text-align:center!important;
 }
+.col-md-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+
+
+  
