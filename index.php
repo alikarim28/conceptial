@@ -1,3 +1,7 @@
+<?php
+	require('includes/connection.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +28,20 @@
 			</div>
 		</div>
 	</div><!--------------------------/header----------------------->
-
+	
 	<div class="categories"><!--------------------categories------------------->
 		<div class="small-container">
 			<div class="row">
-				<div class="col-3">
+				<div class="col-5">
 					<img src="images/category-1.jpg">
 				</div>
-				<div class="col-3">
+				<div class="col-5">
 					<img src="images/category-2.jpg">
 				</div>
-				<div class="col-3">
+				<div class="col-5">
+					<img src="images/category-3.jpg">
+				</div>
+				<div class="col-5">
 					<img src="images/category-3.jpg">
 				</div>
 			</div>
@@ -110,12 +117,11 @@
 	<?php 
 	require "components/offer.php";
 	?>
-	<?
-	require "components/brand.php"
-	?>
-
 	<?php
-	require "components/footer.php"
+	require "components/brand.php";
+	?>
+	<?php
+	require "components/footer.php";
 	?>
 	
 </body>

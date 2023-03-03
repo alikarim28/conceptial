@@ -39,7 +39,7 @@
                     <p>Ali Krayem</p>
                 </div>
                 <div style="margin-left :10px">
-                <a href="" class="btn" style="margin:5px 0">Insert Products</a>
+                <a href="insert_product.php" class="btn" style="margin:5px 0">Insert Products</a>
                 <a href="" class="btn" style="margin:5px 0">View Products</a>
                 <a href="index.php?insert_categories" class="btn" style="margin:5px 0">Insert Categories</a>
                 <a href="" class="btn" style="margin:5px 0">View Categories</a>
