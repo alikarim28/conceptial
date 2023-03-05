@@ -48,7 +48,7 @@ nav li a:hover::after{
 }
 
 p{
-	color: rgb(194, 194, 194);
+	color: rgb(143, 143, 143);
 }
 h1{
 	color: rgb(165, 161, 161);
@@ -151,7 +151,8 @@ h4{
 
 }
 .col-4 p{
-	font-size:14px;
+	font-size:15px;
+	text-align: center;
 }
 .col-4:hover{
 	transform: translateY(-5px);
@@ -499,5 +500,7 @@ h2{
 .text-center{text-align:center!important;
 }
 
-
-  
+h5{
+	color: #555;
+	font-weight: normal;
+}

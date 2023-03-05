@@ -1,5 +1,6 @@
 <?php
 	require('includes/connection.php');
+	 include("functions/common_functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -49,69 +50,12 @@
 		</div>
 	</div><!-------------------categories---------------------------->
 	<div><!--------------------products------------------->
-		<div class="small-container" id="	product">
+		<div class="small-container" id="product">
 			<h2 class="title">Featured Products</h2>
 			<div class="row">
-				<div class="col-4"	onclick="window.location.href='sproduct.php'">
-					<img src="images2/product-1.jpg">
-					<h4>Black Wave T-shirt</h4>
-					<p>$15.00</p>
-				</div>
-				<div class="col-4" onclick="window.location.href='sproduct2.html'">
-					<img src="images2/product-2.jpg">
-					<h4>Black Pijama</h4>
-					<p>$20.00</p>
-				</div>
-				<div class="col-4" onclick="window.location.href='sproduct3.html'">
-					<img src="images2/product-3.jpg" onclick="window.location.href='sproduct3.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$15.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-4.jpg" onclick="window.location.href='sproduct4.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-5.jpg" onclick="window.location.href='sproduct5.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-6.jpg" onclick="window.location.href='sproduct6.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-7.jpg" onclick="window.location.href='sproduct7.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-8.jpg" onclick="window.location.href='sproduct8.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-9.jpg" onclick="window.location.href='sproduct9.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-10.jpg" onclick="window.location.href='sproduct10.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-11.jpg" onclick="window.location.href='sproduct11.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-12.jpg" onclick="window.location.href='sproduct12.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
+				<?php
+					getproducts();
+				?>
 			</div>
 		</div>
 	</div><!------------/product---------------------------------------->
