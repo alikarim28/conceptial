@@ -111,6 +111,7 @@
 					getproducts();
 					get_unique_categories();
 					get_unique_brands();
+					get_unique_gender();
 				?>
 			</div>
 		</div>
