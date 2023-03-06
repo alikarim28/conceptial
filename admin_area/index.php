@@ -28,7 +28,7 @@
         </div>
 </div>
 <div>
-    <div class="container" style="background-color:#171b20">
+    <div class="container" style="background-color:#171b20; max-width:100%;">
         <div class="title">
             <h2 style="color: #555">Manage Details</h2>
         </div>

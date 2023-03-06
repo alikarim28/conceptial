@@ -18,6 +18,26 @@
         </div>";
         }
     }
+    function getcategories(){
+        global $con;
+        $select_categories = "Select * from `categories`";
+        $result_query = mysqli_query($con,$select_categories);
+        while($row=mysqli_fetch_assoc($result_query)){
+            $category_title = $row['category_title'];
+            $category_id = $row['category_id'];
+            echo "<option value='$category_id'>$category_title</option>";
+        }
+    }
+    function getbrands(){
+        global $con;
+        $select_brand = "Select * from `brands`";
+        $result_query = mysqli_query($con,$select_brand);
+        while($row=mysqli_fetch_assoc($result_query)){
+            $brand_title = $row['brand_title'];
+            $brand_id = $row['brand_id'];
+            echo "<option value='$brand_id'>$brand_title</option>";
+        }
+    }
 
 
 

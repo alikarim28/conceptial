@@ -35,16 +35,70 @@
 		<div class="small-container">
 			<div class="row">
 				<div class="col-5">
-					<img src="images/category-1.jpg">
+				<div class="filter-menu">
+					<div class="filter-item">
+						<label for="category">Category:</label>
+						<select id="category">
+						<option value="">All</option>
+						<?php 
+							getcategories();
+						?>
+						</select>
+					</div>
+				</div>
 				</div>
 				<div class="col-5">
-					<img src="images/category-2.jpg">
+					<div class="filter-menu">
+					<div class="filter-item">
+					<label for="brand">brand:</label>
+						<select id="brand">
+							<option value="">All</option>
+							<?php 
+							getbrands();
+						?>
+						</select>
+					</div>
+					</div>
 				</div>
 				<div class="col-5">
-					<img src="images/category-3.jpg">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="size">Size:</label>
+					<select id="size">
+						<option value="">All</option>
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<option value="large">Large</option>
+					</select>
+  				</div>
+				</div>
 				</div>
 				<div class="col-5">
-					<img src="images/category-3.jpg">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="gender">Gender:</label>
+					<select id="gender">
+						<option value="">All</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="unisex">Unisex</option>
+					</select>
+				</div>
+				</div>
+				</div>
+				<div class="col-5">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="price">Price:</label>
+					<select id="price">
+						<option value="">All</option>
+						<option value="0-25">$0 - $25</option>
+						<option value="25-50">$25 - $50</option>
+						<option value="50-100">$50 - $100</option>
+						<option value="100+">$100+</option>
+					</select>
+				</div>
+				</div>
 				</div>
 			</div>
 		</div>
