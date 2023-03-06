@@ -4,6 +4,10 @@ if(isset($_POST['insert_product'])){
         $product_title = $_POST['product_title'];
         $description = $_POST['description'];
         $product_keywords = $_POST['product_keywords'];
+        $product_small = $_POST['small_quantity'];
+        $product_medium = $_POST['medium_quantity'];
+        $product_large = $_POST['large_quantity'];
+        $product_gender= $_POST['product_gender'];
         $product_category = $_POST['product_category'];
         $product_brand = $_POST['product_brand'];
         $product_price = $_POST['product_price'];
@@ -18,6 +22,7 @@ if(isset($_POST['insert_product'])){
         $temp_image2= $_FILES['product_image2']['tmp_name'];
         $temp_image3 = $_FILES['product_image3']['tmp_name'];
     if($product_title=='' or $description=='' or $product_keywords==''or $product_category==''
+    or $product_small =='' or $product_medium==''or $product_large=='' or $product_gender=='' 
     or $product_brand==''or $product_price=='' or $product_image1=='' or $product_image2==''or $product_image3==''){
         echo "<script>alert('please fill all the available fields')</script>";
     }else{
@@ -26,9 +31,9 @@ if(isset($_POST['insert_product'])){
         move_uploaded_file($temp_image3,"./product_images/$product_image3");
 
         $insert_product = "insert into `product`(product_title,product_description,
-        product_keywords,category_id,brand_id,product_image1,product_image2,
+        product_keywords,small_quantity,medium_quantity,large_quantity,product_gender,category_id,brand_id,product_image1,product_image2,
         product_image3,product_price,date,status) 
-        values('$product_title','$description','$product_keywords', '$product_category'
+        values('$product_title','$description','$product_keywords','$product_small','$product_medium',' $product_large','$product_gender' ,'$product_category'
         ,'$product_brand','$product_image1','$product_image2','$product_image3','$product_price',NOW(),'true')";
         $result_query=mysqli_query($con,$insert_product);
         if($result_query){
@@ -76,6 +81,40 @@ if(isset($_POST['insert_product'])){
                 <input type="text" name="product_keywords" id="product_keywords" class="form-control" placeholder="Enter Product keywords" autocomplete="off" required>
             </div>
 
+            <div class="form-outline mb-4 w-50 m-auto"><!--------small quantity-------->
+                <label for="small_quantity" class="form-label">
+                    Small quantity
+                </label>
+                <input type="number" name="small_quantity" id="small_quantity"" class="form-control" placeholder="Enter small quantity" autocomplete="off" required>
+            </div>
+
+            <div class="form-outline mb-4 w-50 m-auto"><!--------medium quantity-------->
+                <label for="medium_quantity" class="form-label">
+                    Medium quantity
+                </label>
+                <input type="number" name="medium_quantity" id="medium_quantity" class="form-control" placeholder="Enter medium quantity" autocomplete="off" required>
+            </div>
+
+            <div class="form-outline mb-4 w-50 m-auto"><!--------large quantity-------->
+                <label for="large_quantity" class="form-label">
+                    Large quantity
+                </label>
+                <input type="number" name="large_quantity" id="large_quantity" class="form-control" placeholder="Enter large quantity" autocomplete="off" required>
+            </div>
+            <div class="form-outline mb-4 w-50 m-auto"><!--------Gender-------->
+            <select class="form-select" name="product_gender">
+                <option selected>Select a Gender</option>
+                <?php 
+                    $select_query="Select * from `gender`";
+                    $result_query=mysqli_query($con,$select_query);
+                    while($row=mysqli_fetch_assoc($result_query)){
+                        $gender_title=$row['gender'];
+                        $gender_id=$row['gender_id'];
+                        echo"<option value='$gender_id'>$gender_title</option>";
+                    }             
+                ?>
+            </select>
+            </div>
             <div class="form-outline mb-4 w-50 m-auto"><!--------Category-------->
             <select class="form-select" name="product_category">
                 <option selected>Select a Category</option>
@@ -126,7 +165,7 @@ if(isset($_POST['insert_product'])){
                 <label for="product_price" class="form-label">
                         Product price
                 </label>
-                <input type="text" name="product_price" id="product_price" class="form-control" placeholder="Enter Product price" autocomplete="off" required>
+                <input type="number" name="product_price" id="product_price" class="form-control" placeholder="Enter Product price" autocomplete="off" required>
             </div>
             <div class="form-outline mb-4 w-50 m-auto"><!--------price-------->
                 <input type="submit" name="insert_product" value="Insert product" class="btn btn-info">
