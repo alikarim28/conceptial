@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 06, 2023 at 11:08 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 06 mars 2023 à 18:35
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,22 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `website`
+-- Base de données : `website`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands`
+-- Structure de la table `brands`
 --
 
 CREATE TABLE `brands` (
   `brand_id` int(11) NOT NULL,
   `brand_title` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `brands`
+-- Déchargement des données de la table `brands`
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
@@ -43,16 +42,16 @@ INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `categories`
 --
 
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
   `category_title` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- Déchargement des données de la table `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category_title`) VALUES
@@ -61,7 +60,27 @@ INSERT INTO `categories` (`category_id`, `category_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Structure de la table `gender`
+--
+
+CREATE TABLE `gender` (
+  `gender_id` int(11) NOT NULL,
+  `gender` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `gender`
+--
+
+INSERT INTO `gender` (`gender_id`, `gender`) VALUES
+(1, 'M'),
+(2, 'F'),
+(3, 'U');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `product`
 --
 
 CREATE TABLE `product` (
@@ -69,6 +88,10 @@ CREATE TABLE `product` (
   `product_title` varchar(100) NOT NULL,
   `product_description` varchar(255) NOT NULL,
   `product_keywords` varchar(255) NOT NULL,
+  `small_quantity` int(11) NOT NULL,
+  `medium_quantity` int(11) NOT NULL,
+  `large_quantity` int(11) NOT NULL,
+  `product_gender` varchar(100) NOT NULL,
   `category_id` int(11) NOT NULL,
   `brand_id` int(11) NOT NULL,
   `product_image1` varchar(255) NOT NULL,
@@ -77,19 +100,19 @@ CREATE TABLE `product` (
   `product_price` varchar(100) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product`
+-- Déchargement des données de la table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `product_image1`, `product_image2`, `product_image3`, `product_price`, `date`, `status`) VALUES
-(5, 'shoes', 'da.,sdmasd', 'asdasds,', 10, 37, 'Screenshot (16).png', 'Screenshot (27).png', 'Screenshot (30).png', '20$', '2023-03-06 08:10:27', 'true');
+INSERT INTO `product` (`product_id`, `product_title`, `product_description`, `product_keywords`, `small_quantity`, `medium_quantity`, `large_quantity`, `product_gender`, `category_id`, `brand_id`, `product_image1`, `product_image2`, `product_image3`, `product_price`, `date`, `status`) VALUES
+(7, 'jehfj', 'hj', 'hjh', 90, 56, 78, '1', 10, 37, 'IMG_7584.JPG', 'IMG_7537.JPG', 'IMG_7556.JPG', '899', '2023-03-06 11:15:02', 'true');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usertable`
+-- Structure de la table `usertable`
 --
 
 CREATE TABLE `usertable` (
@@ -99,10 +122,10 @@ CREATE TABLE `usertable` (
   `password` varchar(255) NOT NULL,
   `code` mediumint(50) NOT NULL,
   `status` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usertable`
+-- Déchargement des données de la table `usertable`
 --
 
 INSERT INTO `usertable` (`id`, `name`, `email`, `password`, `code`, `status`) VALUES
@@ -111,57 +134,69 @@ INSERT INTO `usertable` (`id`, `name`, `email`, `password`, `code`, `status`) VA
 (16, '', '', '$2y$10$Pa8sGHvGu9T25XvqkpejVeqRwNxTI4A/kHvwgAo1iJiRBxuUBVsj2', 465111, 'notverified');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `brands`
+-- Index pour la table `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
--- Indexes for table `categories`
+-- Index pour la table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `product`
+-- Index pour la table `gender`
+--
+ALTER TABLE `gender`
+  ADD PRIMARY KEY (`gender_id`);
+
+--
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `usertable`
+-- Index pour la table `usertable`
 --
 ALTER TABLE `usertable`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `brands`
+-- AUTO_INCREMENT pour la table `brands`
 --
 ALTER TABLE `brands`
   MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pour la table `gender`
 --
-ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `gender`
+  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `usertable`
+-- AUTO_INCREMENT pour la table `product`
+--
+ALTER TABLE `product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `usertable`
 --
 ALTER TABLE `usertable`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
