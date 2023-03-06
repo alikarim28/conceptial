@@ -16,6 +16,7 @@
 	<link rel = "icon" href ="images/icon-1.png" type = "image/x-icon">
 </head>
 <body>
+	
 <?php require "components/header.php";
 ?>			</div>
 			<div class="row">
@@ -38,11 +39,12 @@
 				<div class="filter-menu">
 					<div class="filter-item">
 						<label for="category">Category:</label>
-						<select id="category">
+						<select id="category" onchange="changecategory()">
 						<option value="">All</option>
 						<?php 
 							getcategories();
 						?>
+						<input type="hidden" name="selected">
 						</select>
 					</div>
 				</div>
@@ -55,7 +57,7 @@
 							<option value="">All</option>
 							<?php 
 							getbrands();
-						?>
+							?>
 						</select>
 					</div>
 					</div>
@@ -108,10 +110,11 @@
 			<h2 class="title">Featured Products</h2>
 			<div class="row">
 				<?php
-					getproducts();
-					get_unique_categories();
-					get_unique_brands();
-					get_unique_gender();
+					// getproducts();
+					// get_unique_categories();
+					// get_unique_brands();
+					// get_unique_gender();
+					get_all_products_intersection();
 				?>
 			</div>
 		</div>
@@ -126,5 +129,16 @@
 	require "components/footer.php";
 	?>
 	
+
+<script>
+	function changecategory(){
+		var selectElement = document.getElementById("category");
+		var category_id = selectElement.value;
+		if(window.location.href.indexOf("category=") ===-1 ){
+			window.location.href = window.location.href+"?category="+ category_id;
+		}
+	}
+
+</script>
 </body>
 </html>
