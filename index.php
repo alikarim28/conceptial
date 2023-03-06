@@ -109,6 +109,7 @@
 			<div class="row">
 				<?php
 					getproducts();
+					get_unique_categories();
 				?>
 			</div>
 		</div>
