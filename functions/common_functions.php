@@ -58,6 +58,28 @@
                 }
             }
         }
+
+        function get_unique_gender(){
+            global $con;
+            if(isset($_GET['gender'])){
+                $gender_id = $_GET['gender'];
+                    $select_query= "Select * from `product` where product_gender = $gender_id";
+                    $result_query= mysqli_query($con,$select_query);
+                    while($row=mysqli_fetch_assoc($result_query)){
+                        $product_id=$row['product_id'];
+                        $product_title=$row['product_title'];
+                        $product_description = $row['product_description'];
+                        $product_image1 = $row['product_image1'];
+                        $product_price = $row['product_price'];
+                        echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
+                        <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
+                        <h4>$product_title</h4>
+                        <h5>$product_description</h5>
+                        <p>$product_price</p>
+                        </div>";
+                    }
+                }
+            }
     function getbrands(){
         global $con;
         $select_brand = "Select * from `brands`";
