@@ -537,3 +537,32 @@ h5{
 	background-color: #f8f8f8;
 	width: -webkit-fill-available;
   }
+  .search-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .search-form input[type="text"] {
+	padding: 20px;
+	border-radius: 30px;
+	border: none;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	font-size: 24px;
+	width: 600px;
+  }
+  
+  .search-form button[type="submit"] {
+	background-color: #852d51;
+	border: none;
+	color: white;
+	cursor: pointer;
+	padding: 20px 30px;
+	border-radius: 30px;
+	margin-left: 10px;
+	font-size: 24px;
+  }
+  
+  .search-form button[type="submit"]:hover {
+	background-color: #6c224a;
+  }

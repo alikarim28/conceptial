@@ -102,7 +102,11 @@
 				</div>
 			</div>
 		</div>
-	</div><!-------------------categories---------------------------->
+	</div>
+	<form class="search-form">
+  		<input type="text" placeholder="Search...">
+  		<button type="submit"><i class="fa fa-search"></i></button>
+	</form><!-------------------categories---------------------------->
 	<div><!--------------------products------------------->
 		<div class="small-container" id="product">
 			<h2 class="title">Featured Products</h2>
