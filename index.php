@@ -31,7 +31,12 @@
 			</div>
 		</div>
 	</div><!--------------------------/header----------------------->
-	
+	<form action="#" method="get">
+  		<div class="search-container">
+    		<input type="text" name="search" placeholder="Search...">
+    		<button type="submit" class="search-button">Search</button>
+  		</div>
+	</form>
 	<div class="categories"><!--------------------categories------------------->
 		<div class="small-container">
 			<div class="row">
@@ -103,19 +108,12 @@
 			</div>
 		</div>
 	</div>
-	<form class="search-form">
-  		<input type="text" placeholder="Search...">
-  		<button type="submit"><i class="fa fa-search"></i></button>
-	</form><!-------------------categories---------------------------->
+	<!-------------------categories---------------------------->
 	<div><!--------------------products------------------->
 		<div class="small-container" id="product">
 			<h2 class="title">Featured Products</h2>
 			<div class="row">
 				<?php
-					// getproducts();
-					// get_unique_categories();
-					// get_unique_brands();
-					// get_unique_gender();
 					get_all_products_intersection();
 				?>
 			</div>
