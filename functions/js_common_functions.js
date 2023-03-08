@@ -109,3 +109,30 @@ function changegender(){
         }
     }
 }
+function changepricef(){
+    console.log(window.location.href);
+    var selectElement = document.getElementById("pricef");
+    var pricef_id = selectElement.value;
+    if(pricef_id == -1){
+        var url =window.location.href.replace(/[?|&]pricef=\d+/, "");
+        if(url.indexOf("?") ===-1 ){
+            let index = url.indexOf("&");
+            if (index !== -1) {
+                let firstPart = url.substr(0, index);
+                let secondPart = url.substr(index + 1);
+                url = firstPart + "?" + secondPart;
+            }
+        }
+        window.location.href=url;
+    }else{
+        if(window.location.href.indexOf("pricef=") ===-1 ){
+            if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+                window.location.href = window.location.href+"&pricef="+ pricef_id;
+            else{
+                window.location.href = window.location.href+"?pricef="+ pricef_id;
+            }
+        }else{
+            window.location.href=window.location.href.replace(/pricef=\d+/, "pricef="+pricef_id);
+        }
+    }
+}

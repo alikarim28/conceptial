@@ -90,13 +90,12 @@
 				<div class="col-5">
 				<div class="filter-menu">
 				<div class="filter-item">
-					<label for="price">Price:</label>
-					<select id="price">
+					<label for="pricef">Price:</label>
+					<select id="pricef" onchange="changepricef()">
 						<option value="-1">All</option>
-						<option value="0-25">$0 - $25</option>
-						<option value="25-50">$25 - $50</option>
-						<option value="50-100">$50 - $100</option>
-						<option value="100+">$100+</option>
+						<?php
+							getpricef();
+						?>
 					</select>
 				</div>
 				</div>

@@ -9,21 +9,24 @@
             if(!isset($_GET['brand'])){
                 if(!isset($_GET['size'])){
                     if(!isset($_GET['gender'])){
-                        $select_query= "Select * from `product` ORDER BY rand()";
-                        $result_query= mysqli_query($con,$select_query);
-                        while($row=mysqli_fetch_assoc($result_query)){
-                            $product_id=$row['product_id'];
-                            $product_title=$row['product_title'];
-                            $product_description = $row['product_description'];
-                            $product_image1 = $row['product_image1'];
-                            $product_price = $row['product_price'];
-                            echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
-                            <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
-                            <h4>$product_title</h4>
-                            <h5>$product_description</h5>
-                            <p>$product_price$</p>
-                            </div>";
-                    }   }
+                        if(!isset($_GET['pricef'])){
+                            $select_query= "Select * from `product` ORDER BY rand()";
+                            $result_query= mysqli_query($con,$select_query);
+                            while($row=mysqli_fetch_assoc($result_query)){
+                                $product_id=$row['product_id'];
+                                $product_title=$row['product_title'];
+                                $product_description = $row['product_description'];
+                                $product_image1 = $row['product_image1'];
+                                $product_price = $row['product_price'];
+                                echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
+                                <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
+                                <h4>$product_title</h4>
+                                <h5>$product_description</h5>
+                                <p>$product_price$</p>
+                                </div>";
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -100,6 +103,25 @@
             }
         }
     }
+        function getpricef(){
+        global $con;
+        $select_pricef = "Select * from `pricef`";
+        if(isset($_GET['pricef'])){
+            $pricef_id_selected = $_GET['pricef'];
+        }
+        $result_query = mysqli_query($con,$select_pricef);
+        while($row=mysqli_fetch_assoc($result_query)){
+            $pricef_title = $row['pricef_title'];
+            $pricef_id = $row['pricef_id'];
+            if($pricef_id == $pricef_id_selected){
+                echo "<option value='$pricef_id' selected>$pricef_title</option>";
+            }else{
+            echo "<option value='$pricef_id' >$pricef_title</option>";
+            }
+        }
+    }
+    
+    
 
     //filter products
     function get_all_products_intersection(){
@@ -113,6 +135,9 @@
         if(isset($_GET['category'])){
             $category_id=$_GET['category']; 
         }
+        if(isset($_GET['pricef'])){
+            $pricef_id=$_GET['pricef']; 
+        }
         $select_query = "SELECT * FROM `product` WHERE 1=1";
         if(!empty($category_id)){
             $select_query .= " AND `category_id` IN ('$category_id') ";
@@ -121,19 +146,29 @@
             $select_query .= " AND `brand_id` IN ('$brand_id') ";
         }
         if(!empty($size_id)){
-            if($size_id==0){
+            if($size_id==1){
             $select_query .= " AND `small_quantity`> 0 ";
-            }else if($size_id==1){
+            }else if($size_id==2){
                 $select_query .= " AND `medium_quantity`> 0 ";
-                }else if($size_id==2){
+                }else if($size_id==3){
                     $select_query .= " AND `large_quantity`> 0 ";
                     }
+        }if(!empty($pricef_id)){
+            if($pricef_id==1){
+            $select_query .= " AND `product_price` BETWEEN 0 AND 25 ";
+            }else if($pricef_id==2){
+                $select_query .= " AND `product_price` BETWEEN 25 AND 50 ";
+                }else if($pricef_id==3){
+                    $select_query .= " AND `product_price` BETWEEN 50 AND 100";
+                    }else if($pricef_id==4){
+                        $select_query .= " AND `product_price` >100";
+                        }
         }
 
         $result_query= mysqli_query($con,$select_query);
                     $num_rows=mysqli_num_rows($result_query);
                     if($num_rows==0){
-                        echo"<h2> NO STOCK FOR THIS GENDER";
+                        echo"<h2 style ='color:red'> NO STOCK for this FILTER";
                     }
                     while($row=mysqli_fetch_assoc($result_query)){
                         $product_id=$row['product_id'];
