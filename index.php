@@ -31,10 +31,10 @@
 			</div>
 		</div>
 	</div><!--------------------------/header----------------------->
-	<form action="#" method="get">
+	<form action="search_product.php" method="get" >
   		<div class="search-container">
-    		<input type="text" name="search" placeholder="Search...">
-    		<button type="submit" class="search-button">Search</button>
+    		<input type="text" name="search_data" placeholder="Search...">
+    		<button type="submit" class="search-button" name="search_data_product" value="Search">Search</button>
   		</div>
 	</form>
 	<div class="categories"><!--------------------categories------------------->
