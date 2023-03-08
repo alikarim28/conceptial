@@ -182,7 +182,7 @@
                         $product_description = $row['product_description'];
                         $product_image1 = $row['product_image1'];
                         $product_price = $row['product_price'];
-                        echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
+                        echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php?product_id=$product_id'\">
                         <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
                         <h4>$product_title</h4>
                         <h5>$product_description</h5>
