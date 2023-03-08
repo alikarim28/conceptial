@@ -65,11 +65,11 @@
 				<div class="filter-menu">
 				<div class="filter-item">
 					<label for="size">Size:</label>
-					<select id="size">
-						<option value="-1">All</option>
-						<option value="small">Small</option>
-						<option value="medium">Medium</option>
-						<option value="large">Large</option>
+					<select id="size" onchange="changesize()">
+					<option value="-1">All</option>
+						<?php
+							getsizes();
+						?>
 					</select>
   				</div>
 				</div>
@@ -78,11 +78,11 @@
 				<div class="filter-menu">
 				<div class="filter-item">
 					<label for="gender">Gender:</label>
-					<select id="gender">
+					<select id="gender" onchange="changegender()">
 						<option value="-1">All</option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="unisex">Unisex</option>
+						<?php
+							getgenders();
+						?>
 					</select>
 				</div>
 				</div>
@@ -130,6 +130,7 @@
 	
 
 <script>
+	//change category
 	function changecategory(){
 		console.log(window.location.href);
 		var selectElement = document.getElementById("category");
@@ -139,26 +140,25 @@
 			if(url.indexOf("?") ===-1 ){
 				let index = url.indexOf("&");
 				if (index !== -1) {
-				let firstPart = url.substr(0, index);
-				let secondPart = url.substr(index + 1);
-				url = firstPart + "?" + secondPart;
+					let firstPart = url.substr(0, index);
+					let secondPart = url.substr(index + 1);
+					url = firstPart + "?" + secondPart;
+				}
 			}
-		}
 			window.location.href=url;
-
-		
 		}else{
-		if(window.location.href.indexOf("category=") ===-1 ){
-			if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
-			window.location.href = window.location.href+"&category="+ category_id;
-			else{
-				window.location.href = window.location.href+"?category="+ category_id;
+			if(window.location.href.indexOf("category=") ===-1 ){
+				if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+				window.location.href = window.location.href+"&category="+ category_id;
+				else{
+					window.location.href = window.location.href+"?category="+ category_id;
+				}
+			}else{
+				window.location.href=window.location.href.replace(/category=\d+/, "category="+category_id);
 			}
-		}else{
-			window.location.href=window.location.href.replace(/category=\d+/, "category="+category_id);
 		}
-	}
 	} 
+	//change brands 
 	function changebrand(){
 		console.log(window.location.href);
 		var selectElement = document.getElementById("brand");
@@ -168,25 +168,78 @@
 			if(url.indexOf("?") ===-1 ){
 				let index = url.indexOf("&");
 				if (index !== -1) {
-				let firstPart = url.substr(0, index);
-				let secondPart = url.substr(index + 1);
-				url = firstPart + "?" + secondPart;
+					let firstPart = url.substr(0, index);
+					let secondPart = url.substr(index + 1);
+					url = firstPart + "?" + secondPart;
+				}
 			}
-		}
 			window.location.href=url;
-
-		
 		}else{
-		if(window.location.href.indexOf("brand=") ===-1 ){
-			if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
-			window.location.href = window.location.href+"&brand="+ brand_id;
-			else{
-				window.location.href = window.location.href+"?brand="+ brand_id;
+			if(window.location.href.indexOf("brand=") ===-1 ){
+				if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+					window.location.href = window.location.href+"&brand="+ brand_id;
+				else{
+					window.location.href = window.location.href+"?brand="+ brand_id;
+				}
+			}else{
+				window.location.href=window.location.href.replace(/brand=\d+/, "brand="+brand_id);
 			}
-		}else{
-			window.location.href=window.location.href.replace(/brand=\d+/, "brand="+brand_id);
 		}
 	}
+
+	function changesize(){
+		console.log(window.location.href);
+		var selectElement = document.getElementById("size");
+		var size_id = selectElement.value;
+		if(size_id == -1){
+			var url =window.location.href.replace(/[?|&]size=\d+/, "");
+			if(url.indexOf("?") ===-1 ){
+				let index = url.indexOf("&");
+				if (index !== -1) {
+					let firstPart = url.substr(0, index);
+					let secondPart = url.substr(index + 1);
+					url = firstPart + "?" + secondPart;
+				}
+			}
+			window.location.href=url;
+		}else{
+			if(window.location.href.indexOf("size=") ===-1 ){
+				if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+					window.location.href = window.location.href+"&size="+ size_id;
+				else{
+					window.location.href = window.location.href+"?size="+ size_id;
+				}
+			}else{
+				window.location.href=window.location.href.replace(/size=\d+/, "size="+size_id);
+			}
+		}
+	}
+	function changegender(){
+		console.log(window.location.href);
+		var selectElement = document.getElementById("gender");
+		var gender_id = selectElement.value;
+		if(gender_id == -1){
+			var url =window.location.href.replace(/[?|&]gender=\d+/, "");
+			if(url.indexOf("?") ===-1 ){
+				let index = url.indexOf("&");
+				if (index !== -1) {
+					let firstPart = url.substr(0, index);
+					let secondPart = url.substr(index + 1);
+					url = firstPart + "?" + secondPart;
+				}
+			}
+			window.location.href=url;
+		}else{
+			if(window.location.href.indexOf("gender=") ===-1 ){
+				if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+					window.location.href = window.location.href+"&gender="+ gender_id;
+				else{
+					window.location.href = window.location.href+"?gender="+ gender_id;
+				}
+			}else{
+				window.location.href=window.location.href.replace(/gender=\d+/, "gender="+gender_id);
+			}
+		}
 	}
 
 </script>
