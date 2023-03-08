@@ -44,7 +44,6 @@
 						<?php 
 							getcategories();
 						?>
-						<input type="hidden" name="selected">
 						</select>
 					</div>
 				</div>
@@ -53,7 +52,7 @@
 					<div class="filter-menu">
 					<div class="filter-item">
 					<label for="brand">brand:</label>
-						<select id="brand">
+						<select id="brand" onchange="changebrand()">
 							<option value="">All</option>
 							<?php 
 							getbrands();
@@ -134,8 +133,15 @@
 	function changecategory(){
 		var selectElement = document.getElementById("category");
 		var category_id = selectElement.value;
-		if(window.location.href.indexOf("category=") ===-1 ){
+		if(window.location.href.indexOf("category="+category_id) ===-1 ){
 			window.location.href = window.location.href+"?category="+ category_id;
+		}else{}
+	} 
+	function changebrand(){
+		var selectElement = document.getElementById("brand");
+		var brand_id = selectElement.value;
+		if(window.location.href.indexOf("brand=") ===-1 ){
+			window.location.href = window.location.href+"?brand="+ brand_id;
 		}
 	}
 
