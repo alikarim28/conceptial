@@ -230,6 +230,9 @@
                                         <div class="small-img-col">
                                             <img src="./admin_area/product_images/'.$product_image3.'" width="100%" class="small-img">
                                         </div>
+                                        <div class="small-img-col">
+                                            <img src="./admin_area/product_images/'.$product_image1.'" width="100%" class="small-img">
+                                        </div>
                                     </div>
                         
                                 </div>

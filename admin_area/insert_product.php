@@ -31,7 +31,7 @@ if(isset($_POST['insert_product'])){
         move_uploaded_file($temp_image3,"./product_images/$product_image3");
 
         $insert_product = "insert into `product`(product_title,product_description,
-        product_keywords,small_quantity,medium_quantity,large_quantity,product_gender,category_id,brand_id,product_image1,product_image2,
+        product_keywords,small_quantity,medium_quantity,large_quantity,gender_id,category_id,brand_id,product_image1,product_image2,
         product_image3,product_price,date,status) 
         values('$product_title','$description','$product_keywords','$product_small','$product_medium',' $product_large','$product_gender' ,'$product_category'
         ,'$product_brand','$product_image1','$product_image2','$product_image3','$product_price',NOW(),'true')";
@@ -108,7 +108,7 @@ if(isset($_POST['insert_product'])){
                     $select_query="Select * from `gender`";
                     $result_query=mysqli_query($con,$select_query);
                     while($row=mysqli_fetch_assoc($result_query)){
-                        $gender_title=$row['gender'];
+                        $gender_title=$row['gender_title'];
                         $gender_id=$row['gender_id'];
                         echo"<option value='$gender_id'>$gender_title</option>";
                     }             
