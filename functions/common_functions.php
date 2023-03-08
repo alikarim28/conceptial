@@ -126,11 +126,18 @@
     function getbrands(){
         global $con;
         $select_brand = "Select * from `brands`";
+        if(isset($_GET['brand'])){
+            $brand_id_selected = $_GET['brand'];
+        }
         $result_query = mysqli_query($con,$select_brand);
         while($row=mysqli_fetch_assoc($result_query)){
             $brand_title = $row['brand_title'];
             $brand_id = $row['brand_id'];
-            echo "<option value='$brand_id'>$brand_title</option>";
+            if($brand_id == $brand_id_selected){
+                echo "<option value='$brand_id' selected>$brand_title</option>";
+            }else{
+            echo "<option value='$brand_id' >$brand_title</option>";
+            }
         }
     }
 

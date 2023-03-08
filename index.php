@@ -40,7 +40,7 @@
 					<div class="filter-item">
 						<label for="category">Category:</label>
 						<select id="category" onchange="changecategory()">
-						<option value="">All</option>
+						<option value="-1">All</option>
 						<?php 
 							getcategories();
 						?>
@@ -53,7 +53,7 @@
 					<div class="filter-item">
 					<label for="brand">brand:</label>
 						<select id="brand" onchange="changebrand()">
-							<option value="">All</option>
+							<option value="-1">All</option>
 							<?php 
 							getbrands();
 							?>
@@ -66,7 +66,7 @@
 				<div class="filter-item">
 					<label for="size">Size:</label>
 					<select id="size">
-						<option value="">All</option>
+						<option value="-1">All</option>
 						<option value="small">Small</option>
 						<option value="medium">Medium</option>
 						<option value="large">Large</option>
@@ -79,7 +79,7 @@
 				<div class="filter-item">
 					<label for="gender">Gender:</label>
 					<select id="gender">
-						<option value="">All</option>
+						<option value="-1">All</option>
 						<option value="male">Male</option>
 						<option value="female">Female</option>
 						<option value="unisex">Unisex</option>
@@ -92,7 +92,7 @@
 				<div class="filter-item">
 					<label for="price">Price:</label>
 					<select id="price">
-						<option value="">All</option>
+						<option value="-1">All</option>
 						<option value="0-25">$0 - $25</option>
 						<option value="25-50">$25 - $50</option>
 						<option value="50-100">$50 - $100</option>
@@ -131,18 +131,62 @@
 
 <script>
 	function changecategory(){
+		console.log(window.location.href);
 		var selectElement = document.getElementById("category");
 		var category_id = selectElement.value;
-		if(window.location.href.indexOf("category="+category_id) ===-1 ){
-			window.location.href = window.location.href+"?category="+ category_id;
-		}else{}
+		if(category_id == -1){
+			var url =window.location.href.replace(/[?|&]category=\d+/, "");
+			if(url.indexOf("?") ===-1 ){
+				let index = url.indexOf("&");
+				if (index !== -1) {
+				let firstPart = url.substr(0, index);
+				let secondPart = url.substr(index + 1);
+				url = firstPart + "?" + secondPart;
+			}
+		}
+			window.location.href=url;
+
+		
+		}else{
+		if(window.location.href.indexOf("category=") ===-1 ){
+			if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+			window.location.href = window.location.href+"&category="+ category_id;
+			else{
+				window.location.href = window.location.href+"?category="+ category_id;
+			}
+		}else{
+			window.location.href=window.location.href.replace(/category=\d+/, "category="+category_id);
+		}
+	}
 	} 
 	function changebrand(){
+		console.log(window.location.href);
 		var selectElement = document.getElementById("brand");
 		var brand_id = selectElement.value;
-		if(window.location.href.indexOf("brand=") ===-1 ){
-			window.location.href = window.location.href+"?brand="+ brand_id;
+		if(brand_id == -1){
+			var url =window.location.href.replace(/[?|&]brand=\d+/, "");
+			if(url.indexOf("?") ===-1 ){
+				let index = url.indexOf("&");
+				if (index !== -1) {
+				let firstPart = url.substr(0, index);
+				let secondPart = url.substr(index + 1);
+				url = firstPart + "?" + secondPart;
+			}
 		}
+			window.location.href=url;
+
+		
+		}else{
+		if(window.location.href.indexOf("brand=") ===-1 ){
+			if(!isNaN(window.location.href.charAt(window.location.href.length - 1)))
+			window.location.href = window.location.href+"&brand="+ brand_id;
+			else{
+				window.location.href = window.location.href+"?brand="+ brand_id;
+			}
+		}else{
+			window.location.href=window.location.href.replace(/brand=\d+/, "brand="+brand_id);
+		}
+	}
 	}
 
 </script>
