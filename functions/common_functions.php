@@ -1,33 +1,27 @@
 <?php
     require "./includes/connection.php";
-    function getproducts(){
+    function search_products(){
         global $con;
-
-
-        //conditon:
-        if(!isset($_GET['category'])){
-            if(!isset($_GET['brand'])){
-                if(!isset($_GET['size'])){
-                    if(!isset($_GET['gender'])){
-                        if(!isset($_GET['pricef'])){
-                            $select_query= "Select * from `product` ORDER BY rand()";
-                            $result_query= mysqli_query($con,$select_query);
-                            while($row=mysqli_fetch_assoc($result_query)){
-                                $product_id=$row['product_id'];
-                                $product_title=$row['product_title'];
-                                $product_description = $row['product_description'];
-                                $product_image1 = $row['product_image1'];
-                                $product_price = $row['product_price'];
-                                echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
-                                <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
-                                <h4>$product_title</h4>
-                                <h5>$product_description</h5>
-                                <p>$product_price$</p>
-                                </div>";
-                            }
-                        }
-                    }
+        if(isset($_GET['search_data_product'])){
+            $search_data_value=$_GET['search_data'];
+            $select_query= "Select * from `product` WHERE product_keywords like '%$search_data_value%' ";
+            $result_query= mysqli_query($con,$select_query);
+            if(mysqli_num_rows($result_query)){
+                while($row=mysqli_fetch_assoc($result_query)){
+                    $product_id=$row['product_id'];
+                    $product_title=$row['product_title'];
+                    $product_description = $row['product_description'];
+                    $product_image1 = $row['product_image1'];
+                    $product_price = $row['product_price'];
+                    echo"<div class=\"col-4\"	onclick=\"window.location.href='sproduct.php'\">
+                    <img src=\"./admin_area/product_images/$product_image1\" alt='$product_image1'>
+                    <h4>$product_title</h4>
+                    <h5>$product_description</h5>
+                    <p>$product_price$</p>
+                    </div>";
                 }
+            }else{
+                echo"<h2 style ='color:red'> NO STOCK for this Search";
             }
         }
     }
@@ -190,5 +184,4 @@
                         </div>";
                     }
     }
-
 ?>
