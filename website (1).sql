@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 06 mars 2023 à 18:35
+-- Généré le : mer. 08 mars 2023 à 19:39
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -65,17 +65,37 @@ INSERT INTO `categories` (`category_id`, `category_title`) VALUES
 
 CREATE TABLE `gender` (
   `gender_id` int(11) NOT NULL,
-  `gender` varchar(1) NOT NULL
+  `gender_title` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `gender`
 --
 
-INSERT INTO `gender` (`gender_id`, `gender`) VALUES
-(1, 'M'),
-(2, 'F'),
-(3, 'U');
+INSERT INTO `gender` (`gender_id`, `gender_title`) VALUES
+(1, 'Male'),
+(2, 'Female');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pricef`
+--
+
+CREATE TABLE `pricef` (
+  `pricef_id` int(11) NOT NULL,
+  `pricef_title` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `pricef`
+--
+
+INSERT INTO `pricef` (`pricef_id`, `pricef_title`) VALUES
+(1, '0$ - 25$'),
+(2, ' 25$ - 50$'),
+(3, '50$ - 100$'),
+(4, '100$+');
 
 -- --------------------------------------------------------
 
@@ -91,7 +111,7 @@ CREATE TABLE `product` (
   `small_quantity` int(11) NOT NULL,
   `medium_quantity` int(11) NOT NULL,
   `large_quantity` int(11) NOT NULL,
-  `product_gender` varchar(100) NOT NULL,
+  `gender_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `brand_id` int(11) NOT NULL,
   `product_image1` varchar(255) NOT NULL,
@@ -106,8 +126,28 @@ CREATE TABLE `product` (
 -- Déchargement des données de la table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_title`, `product_description`, `product_keywords`, `small_quantity`, `medium_quantity`, `large_quantity`, `product_gender`, `category_id`, `brand_id`, `product_image1`, `product_image2`, `product_image3`, `product_price`, `date`, `status`) VALUES
-(7, 'jehfj', 'hj', 'hjh', 90, 56, 78, '1', 10, 37, 'IMG_7584.JPG', 'IMG_7537.JPG', 'IMG_7556.JPG', '899', '2023-03-06 11:15:02', 'true');
+INSERT INTO `product` (`product_id`, `product_title`, `product_description`, `product_keywords`, `small_quantity`, `medium_quantity`, `large_quantity`, `gender_id`, `category_id`, `brand_id`, `product_image1`, `product_image2`, `product_image3`, `product_price`, `date`, `status`) VALUES
+(7, 'jehfj', 'hj', 'hjh', 90, 56, 78, 1, 10, 37, 'IMG_7584.JPG', 'IMG_7537.JPG', 'IMG_7556.JPG', '899', '2023-03-06 11:15:02', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sizes`
+--
+
+CREATE TABLE `sizes` (
+  `size_id` int(11) NOT NULL,
+  `size_title` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `sizes`
+--
+
+INSERT INTO `sizes` (`size_id`, `size_title`) VALUES
+(1, 'Small'),
+(2, 'Medium'),
+(3, 'Large');
 
 -- --------------------------------------------------------
 
@@ -156,10 +196,22 @@ ALTER TABLE `gender`
   ADD PRIMARY KEY (`gender_id`);
 
 --
+-- Index pour la table `pricef`
+--
+ALTER TABLE `pricef`
+  ADD PRIMARY KEY (`pricef_id`);
+
+--
 -- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Index pour la table `sizes`
+--
+ALTER TABLE `sizes`
+  ADD PRIMARY KEY (`size_id`);
 
 --
 -- Index pour la table `usertable`
@@ -190,10 +242,22 @@ ALTER TABLE `gender`
   MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT pour la table `pricef`
+--
+ALTER TABLE `pricef`
+  MODIFY `pricef_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `sizes`
+--
+ALTER TABLE `sizes`
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `usertable`
