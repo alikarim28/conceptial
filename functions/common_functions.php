@@ -184,5 +184,84 @@
                         </div>";
                     }
     }
+    function view_product(){
+        global $con;
+        if(isset($_GET['product_id'])){
+        if(!isset($_GET['category'])){
+            if(!isset($_GET['brand'])){
+                if(!isset($_GET['size'])){
+                    if(!isset($_GET['gender'])){
+                        if(!isset($_GET['pricef'])){
+                            $product_id=$_GET['product_id'];
+                            $select_query= "Select * from `product` where product_id=$product_id";
+                            $result_query= mysqli_query($con,$select_query);
+                            while($row=mysqli_fetch_assoc($result_query)){
+                                $product_id=$row['product_id'];
+                                $product_title=$row['product_title'];
+                                $product_description = $row['product_description'];
+                                $product_image1 = $row['product_image1'];
+                                $product_image2 = $row['product_image2'];
+                                $product_image3 = $row['product_image3'];
+                                $product_price = $row['product_price'];
+                                $small_quantity=$row['small_quantity'];
+                                $medium_quantity=$row['medium_quantity'];
+                                $large_quantity=$row['large_quantity'];
+                                $category_id=$row['category_id'];
+                                $brand_id=$row['brand_id'];
+                                $gender_id=$row['gender_id'];
+                                $select_query1= "Select * from `categories` where category_id=$category_id";
+                                $result_query1= mysqli_query($con,$select_query1);
+                                $row1=mysqli_fetch_assoc($result_query1);
+                                $category=$row1['category_title'];
+                                if($gender_id==1){
+                                    $gender='Men';
+                                }
+                                else{
+                                    $gender='Female';
+                                }
+                                echo' <div id="prodetails" class="section-p1">
+                                <div class="single-pro-image">
+                                    <img src="./admin_area/product_images/'.$product_image1.'" width="100%" id="MainImg">
+
+                                    <div class="small-img-group">
+                                        <div class="small-img-col">
+                                            <img src="./admin_area/product_images/'.$product_image2.'" width="100%" class="small-img">
+                                        </div>
+                                        <div class="small-img-col">
+                                            <img src="./admin_area/product_images/'.$product_image3.'" width="100%" class="small-img">
+                                        </div>
+                                    </div>
+                        
+                                </div>
+                                <div class="single-pro-details">
+                                    <h6>Home / '.$product_title.'</h6>
+                                    <h4>'.$gender.'\'s Fashion '.$category.'</h4>
+                                    <h2> '.$product_price.'$</h2>
+                                    <select>
+                                        <option> Select Size</option>';
+                                        if($small_quantity>0)
+                                        echo'<option> Small</option>';
+                                        if($medium_quantity>0)
+                                        echo'<option> Medium</option>';
+                                        if($large_quantity>0)
+                                        echo'<option> Large</option>';
+                                        echo'</select>    
+                                    
+                                    <input type="number" value="1">
+                                    <a href="" class="btn">Add To Cart</a><br>
+                                    <h4>Product Details</h4>
+                                    <span>
+                                    '.$product_description.'
+                                    </span>
+                                </div>
+                            </div>';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    }
 
 ?>
