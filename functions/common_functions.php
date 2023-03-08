@@ -138,9 +138,15 @@
         if(isset($_GET['pricef'])){
             $pricef_id=$_GET['pricef']; 
         }
+        if(isset($_GET['gender'])){
+            $gender_id=$_GET['gender']; 
+        }
         $select_query = "SELECT * FROM `product` WHERE 1=1";
         if(!empty($category_id)){
             $select_query .= " AND `category_id` IN ('$category_id') ";
+        }
+        if(!empty($gender_id)){
+            $select_query .= " AND `gender_id` IN ('$gender_id') ";
         }
         if(!empty($brand_id)){
             $select_query .= " AND `brand_id` IN ('$brand_id') ";
