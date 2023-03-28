@@ -1,3 +1,7 @@
+<?php
+	require('includes/connection.php');
+	 include("functions/common_functions.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +10,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+	<script src="functions/js_common_functions.js"></script>
 	<title>Conceptial | S T R E E T W E A R </title>
 	<link rel = "icon" href ="images/icon-1.png" type = "image/x-icon">
 </head>
@@ -16,70 +21,92 @@
         <h2>#StayHome</h2>
         <p>Save more by buying online</p>
 	</div>
+	</div><!--------------------------/header----------------------->
+	<form action="search_product.php" method="get" >
+  		<div class="search-container">
+    		<input type="text" name="search_data" placeholder="Search...">
+    		<button type="submit" class="search-button" name="search_data_product" value="Search">Search</button>
+  		</div>
+	</form>
+	<div class="categories"><!--------------------categories------------------->
+		<div class="small-container">
+			<div class="row">
+				<div class="col-5">
+				<div class="filter-menu">
+					<div class="filter-item">
+						<label for="category">Category:</label>
+						<select id="category" onchange="changecategory()">
+						<option value="-1">All</option>
+						<?php 
+							getcategories();
+						?>
+						</select>
+					</div>
+				</div>
+				</div>
+				<div class="col-5">
+					<div class="filter-menu">
+					<div class="filter-item">
+					<label for="brand">brand:</label>
+						<select id="brand" onchange="changebrand()">
+							<option value="-1">All</option>
+							<?php 
+							getbrands();
+							?>
+						</select>
+					</div>
+					</div>
+				</div>
+				<div class="col-5">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="size">Size:</label>
+					<select id="size" onchange="changesize()">
+					<option value="-1">All</option>
+						<?php
+							getsizes();
+						?>
+					</select>
+  				</div>
+				</div>
+				</div>
+				<div class="col-5">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="gender">Gender:</label>
+					<select id="gender" onchange="changegender()">
+						<option value="-1">All</option>
+						<?php
+							getgenders();
+						?>
+					</select>
+				</div>
+				</div>
+				</div>
+				<div class="col-5">
+				<div class="filter-menu">
+				<div class="filter-item">
+					<label for="pricef">Price:</label>
+					<select id="pricef" onchange="changepricef()">
+						<option value="-1">All</option>
+						<?php
+							getpricef();
+						?>
+					</select>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-------------------categories---------------------------->
 	<div><!--------------------products------------------->
 		<div class="small-container" id="	product">
 			<h2 class="title">Featured Products</h2>
 			<div class="row">
-				<div class="col-4" onclick="window.location.href='sproduct.html'">
-					<img src="images2/product-1.jpg">
-					<h4>Black Wave T-shirt</h4>
-					<p>$15.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-2.jpg" onclick="window.location.href='sproduct2.html'">
-					<h4>Black Pijama</h4>
-					<p>$20.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-3.jpg" onclick="window.location.href='sproduct3.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$15.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-4.jpg" onclick="window.location.href='sproduct4.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-5.jpg" onclick="window.location.href='sproduct5.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-6.jpg" onclick="window.location.href='sproduct6.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-7.jpg" onclick="window.location.href='sproduct7.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-8.jpg" onclick="window.location.href='sproduct8.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-9.jpg" onclick="window.location.href='sproduct9.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-10.jpg" onclick="window.location.href='sproduct10.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-11.jpg" onclick="window.location.href='sproduct11.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
-				<div class="col-4">
-					<img src="images2/product-12.jpg" onclick="window.location.href='sproduct12.html'">
-					<h4>Black Printed T-shirt</h4>
-					<p>$50.00</p>
-				</div>
+				<?php
+					get_all_products_intersection();
+				?>
 			</div>
 		</div>
 	</div><!------------/product---------------------------------------->
