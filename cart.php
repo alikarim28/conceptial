@@ -2,6 +2,12 @@
 	require('includes/connection.php');
 	 include("functions/common_functions.php");
 ?>
+<?php
+	if(isset($_POST['remove'])){
+		$cart=$_POST['cart_id'];
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +37,19 @@
 		tr:hover {
 			background-color: #f5f5f5;
 		}
+		.pay-button {
+		font-size: 20px;
+		padding: 10px 20px;
+		background-color: #4CAF50;
+		color: white;
+		border: none;
+		float: right;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.pay-button:hover {
+		background-color: #3e8e41;
+	}
 	</style>
 </head>
 <body>
@@ -40,7 +59,8 @@
         <h2>#StayHome</h2>
         <p>Save more by buying online</p>
 	</div>
-	
+	<form action="" method="POST" enctype="multipart/form-data">
+		
     <table>
 	  <thead>
 	    <tr>
@@ -52,29 +72,51 @@
 	      <th>Remove</th>
 	    </tr>
 	  </thead>
+
 	  <tbody>
+		<?php 
+			global $con;
+			$ip=getIPAddress();
+			$total=0;
+			$cart_query="select * from `cart_details` where ip_address='$ip'";
+			$result_query=mysqli_query($con,$cart_query);
+			while($row=mysqli_fetch_array($result_query)){
+				$cart_id=$row['cart_id'];
+				$product_id=$row['product_id'];
+				$quantity=$row['quantity'];
+				$size=$row['size_id'];
+				$select_product="select * from `product` where product_id=$product_id";
+				$result_query1=mysqli_query($con,$select_product);
+				while($row_product=mysqli_fetch_array($result_query1)){
+					$product_price=$row_product['product_price'];
+					$total+=$product_price*$quantity;
+					$product_name=$row_product['product_title'];
+				
+		?>
 	    <tr>
-	      <td>Product 1</td>
-	      <td>Medium</td>
-	      <td>$10.00</td>
-	      <td>  1</td>
-	      <td><button>Update</button></td>
-	      <td><button>Remove</button></td>
+		<input type="hidden" name="cart_id" value='<?php echo"$cart_id"?>'>
+	      <td><?php echo"$product_name" ?></td>
+	      <td><?php echo"$size" ?></td>
+	      <td><?php echo"$product_price" ?>$</td>
+	      <td>  <?php echo"$quantity" ?></td>
+	      <td><input type="number" name="value" id="value" value='<?php echo"$quantity"?>'>      <input type="submit" name="update_quantity" value="update quantity <?php echo"$cart_id"?>"></td>
+	      <td><input type="submit" name="remove" value="remove <?php echo"$cart_id"?>"></td>
 	    </tr>
-	    <tr>
-	      <td>Product 2</td>
-	      <td>Large</td>
-	      <td>$20.00</td>
-	      <td>  1</td>
-	      <td><button>Update</button></td>
-	      <td><button>Remove</button></td>
-	    </tr>
-	    <!-- Add more rows as needed -->
+	    <?php 
+			}
+		}
+		?>
 	  </tbody>
+	  <tfoot>
+		<tr>
+			<th colspan="2"></th>
+			<th>Total: <?php echo"$total"?>$</th>
+			<th colspan="3"><button class="pay-button" onclick="pay()">Pay</button></th>
+		</tr>
+	</tfoot>
 	</table>
-
+	</form>
 	<?php
-
 		require "components/brand.php";
 		require "components/footer.php";
 	?>
