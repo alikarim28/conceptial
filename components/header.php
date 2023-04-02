@@ -38,6 +38,6 @@ echo "<div class=\"header\" id=\"header1\"> <!-----------header----------->
                         <li><a href=\"account.php\" $account >Account</a></li>
                     </ul>
                 </nav>
-                <img src=\"images2/bag-shopping-solid.svg\" width=\"30px\" height=\"30px\">
+                <a href='cart.php'><img src=\"images2/bag-shopping-solid.svg\" width=\"30px\" height=\"30px\"></a>
             </div>";
 ?>

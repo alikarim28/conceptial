@@ -13,7 +13,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
 	<script src="functions/js_common_functions.js"></script>
 	<title>Conceptial | S T R E E T W E A R </title>
-	<link rel = "icon" href ="images/icon-1.png" type = "image/x-icon">
+	<link rel = "icon" href ="images/icon-1.png" type = "image/x-icon" >
 </head>
 <body>
 	

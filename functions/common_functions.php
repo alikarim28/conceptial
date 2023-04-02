@@ -264,7 +264,7 @@
                                     <h6>Home / '.$product_title.'</h6>
                                     <h4>'.$gender.'\'s Fashion '.$category.'</h4>
                                     <h2> '.$product_price.'$</h2>
-                                    <select>
+                                    <select name="select_size" id="select">
                                         <option> Select Size</option>';
                                         if($small_quantity>0)
                                         echo'<option> Small</option>';
@@ -274,8 +274,18 @@
                                         echo'<option> Large</option>';
                                         echo'</select>    
                                     
-                                    <input type="number" value="1">
-                                    <a href="" class="btn">Add To Cart</a><br>
+                                    <input type="number" name="value" id="value" value="1">
+                                    <button type="submit" class="btn" onclick="addToCart()">Add To Cart</button>
+                                    <script>
+                                    function addToCart() {
+                                    var select = document.getElementById("select");
+                                    var size = select.options[select.selectedIndex].value;
+                                    var v = document.getElementById("value");
+                                    var val = v.value;
+                                    var url = "sproduct.php?product_id='.$product_id.'&add_to_cart='.$product_id.'&select_size=" + size+ "&value="+val;
+                                    window.location.href = url;
+                                    }
+                                    </script>
                                     <h4>Product Details</h4>
                                     <span>
                                     '.$product_description.'
@@ -291,4 +301,66 @@
     }
     }
 
+    // get ip address
+    function getIPAddress() {  
+        //whether ip is from the share internet  
+         if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];  
+            }  
+        //whether ip is from the proxy  
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+         }  
+    //whether ip is from the remote address  
+        else{  
+                 $ip = $_SERVER['REMOTE_ADDR'];  
+         }  
+         return $ip;  
+    }  
+
+
+    function cart(){
+        if(isset($_GET['add_to_cart']) && isset($_GET['select_size']) && isset($_GET['value']) ){
+            
+            global $con;
+            $ip=getIPAddress();
+            $size= $_GET["select_size"];
+            $quantity= $_GET["value"];
+
+            $get_product_id= $_GET['add_to_cart'];
+            $select_query= "select * from `cart_details` where ip_address='$ip' and product_id =$get_product_id  and size_id='$size'";
+            $result_query=mysqli_query($con,$select_query);
+            $row=mysqli_num_rows($result_query);
+            if($row>0){
+                echo"<script>alert('already present in your cart')</script>";
+                echo"<script>window.open('index.php','_self')</script>";
+            }else{
+                $insert_query="insert into `cart_details` (product_id,ip_address,quantity,size_id) values ($get_product_id,'$ip',$quantity,'$size')";
+                $result_query=mysqli_query($con,$insert_query);
+                echo"<script>alert('your item has beeen added')</script>";
+                echo"<script>window.open('index.php','_self')</script>";
+            }
+
+        }
+    }
+
+    function get_total_price(){
+        global $con;
+        $ip=getIPAddress();
+        $total_price=0;
+        $cart_query="select * from `cart_details` where ip_address='$ip'";
+        $result_query=mysqli_querry($con,$cart_query);
+        while($row=mysqli_fetch_array($result_query)){
+            $product_id=$row['product_id'];
+            $quantity=$row['quantity'];
+            $select_product="select * from `product` where product_id=$product_id";
+            $result_query1=mysqli_querry($con,$select_product);
+            while($row_product=mysqli_fetch_array($result_query1)){
+                $product_price=array($row_product['product_price']);
+                $product_value=array_sum($product_price);
+                $tolal+=$product_value*$quantity;
+            }
+        }
+        return $tolal;
+    }
 ?>
