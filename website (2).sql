@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 08 mars 2023 à 19:39
+-- Généré le : dim. 02 avr. 2023 à 15:26
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -37,7 +37,30 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
-(37, 'kasd');
+(37, 'kasd'),
+(38, 'rien');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cart_details`
+--
+
+CREATE TABLE `cart_details` (
+  `cart_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `ip_address` varchar(255) NOT NULL,
+  `quantity` int(100) NOT NULL,
+  `size_id` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `cart_details`
+--
+
+INSERT INTO `cart_details` (`cart_id`, `product_id`, `ip_address`, `quantity`, `size_id`) VALUES
+(1, 8, '::1', 3, 'Medium'),
+(2, 7, '::1', 3, 'Small');
 
 -- --------------------------------------------------------
 
@@ -127,7 +150,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_title`, `product_description`, `product_keywords`, `small_quantity`, `medium_quantity`, `large_quantity`, `gender_id`, `category_id`, `brand_id`, `product_image1`, `product_image2`, `product_image3`, `product_price`, `date`, `status`) VALUES
-(7, 'jehfj', 'hj', 'hjh', 90, 56, 78, 1, 10, 37, 'IMG_7584.JPG', 'IMG_7537.JPG', 'IMG_7556.JPG', '899', '2023-03-06 11:15:02', 'true');
+(7, 'jehfj', 'hj', 'hjh', 90, 56, 78, 1, 10, 37, 'IMG_7584.JPG', 'IMG_7537.JPG', 'IMG_7556.JPG', '899', '2023-03-06 11:15:02', 'true'),
+(8, 'bkjfeui', 'jkbj', 'kj', 0, 90, 78, 2, 10, 37, 'IMG_7536.JPG', 'IMG_7553.JPG', 'IMG_7556.JPG', '909', '2023-03-08 21:43:10', 'true');
 
 -- --------------------------------------------------------
 
@@ -184,6 +208,12 @@ ALTER TABLE `brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
+-- Index pour la table `cart_details`
+--
+ALTER TABLE `cart_details`
+  ADD PRIMARY KEY (`cart_id`);
+
+--
 -- Index pour la table `categories`
 --
 ALTER TABLE `categories`
@@ -227,7 +257,13 @@ ALTER TABLE `usertable`
 -- AUTO_INCREMENT pour la table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT pour la table `cart_details`
+--
+ALTER TABLE `cart_details`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
@@ -251,7 +287,7 @@ ALTER TABLE `pricef`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `sizes`
