@@ -1,4 +1,5 @@
-<?php require_once "controllerUserData.php"; ?>
+<?php require_once "controllerUserData.php"; 
+include("./functions/common_functions.php")?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,22 +67,31 @@
                             Not a member? <a href="sign-up.php">Signup now</a>
                         </div>
                     </form>
-                    <form action="account.php" method="post"  autocomplete="" class="signup">
+                    <form action="" method="post"  autocomplete="" class="signup" enctype="multipart/form-data">
                         <div class="field">
-                            <input type="text" placeholder="Full    Name" required>
+                            <input type="text" placeholder="Username" required name="user_username">
                         </div>
                         <div class="field">
-                            <input type="text" placeholder="Email Address" required>
+                            <input type="email" placeholder="Email Address" required name="user_email">
                         </div>
                         <div class="field">
-                            <input type="password" placeholder="Password" required>
+                            <input type="file" placeholder="Email Address" required name="user_image">
                         </div>
                         <div class="field">
-                            <input type="password" placeholder="Confirm password" required>
+                            <input type="password" placeholder="Password" required name="user_password">
+                        </div>
+                        <div class="field">
+                            <input type="password" placeholder="Confirm password" required name="conf_user_password">
+                        </div>
+                        <div class="field">
+                            <input type="text" placeholder="Address" required name="user_address">
+                        </div>
+                        <div class="field">
+                            <input type="text" placeholder="Mobile number" required name="user_contact">
                         </div>
                         <div class="field btn1">
                             <div class="btn1-layer"></div>
-                            <input type="submit" name='signup'  value="Signup">
+                            <input type="submit" name='user_register'  value="Signup">
                         </div>
                     </form>
                 </div>
@@ -109,3 +119,32 @@
          </script>
 </body >
 </html>
+
+
+<?php
+    if(isset($_POST['user_register'])){
+        $user_username = $_POST['user_username'];
+        $user_email = $_POST['user_email'];
+        $user_password = $_POST['user_password'];
+        $conf_user_password = $_POST['conf_user_password'];
+        $user_address = $_POST['user_address'];  
+        $user_contact = $_POST['user_contact'];
+        $user_image = $_FILES['user_image']['name'];
+        $user_image_tmp = $_FILES['user_image']['tmp_name'];
+        $user_ip=getIPAddress();
+
+
+        $sql_querry = "Select * from `user_table` where username = $user_username";
+        
+        move_uploaded_file($user_image_tmp,'./user_area/user_images');
+        $insert_querry = "insert into `user_table`(username,user_email,user_password,user_image,user_ip,user_address,user_mobile)
+         values('$user_username','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_contact') ";
+         $sql_execute = mysqli_query($con,$insert_querry);
+        if($sql_execute){
+            echo"<script> alert('Data inserted Seccussfully')";
+        }else{
+            die(mysqli_error($con));
+        }
+
+    } 
+?>
