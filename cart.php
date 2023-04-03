@@ -60,7 +60,8 @@
         <p>Save more by buying online</p>
 	</div>
 	<form action="" method="POST" enctype="multipart/form-data">
-		
+	
+	<div class="container">
     <table>
 	  <thead>
 	    <tr>
@@ -115,6 +116,7 @@
 		</tr>
 	</tfoot>
 	</table>
+	</div>
 	</form>
 	<?php
 		require "components/brand.php";
