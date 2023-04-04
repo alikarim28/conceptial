@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="../css/stylesheet.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c161cb1301.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="header" id="header1"> <!-----------header----------->
@@ -61,6 +62,9 @@
     }
     if(isset($_GET['insert_brands'])){
         include('insert-brands.php');
+    }
+    if(isset($_GET['view_products'])){
+        include('view_products.php');
     }
     ?>
 </div>
