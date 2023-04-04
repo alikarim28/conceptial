@@ -41,7 +41,7 @@
                 </div>
                 <div style="margin-left :10px">
                 <a href="insert_product.php" class="btn" style="margin:5px 0">Insert Products</a>
-                <a href="" class="btn" style="margin:5px 0">View Products</a>
+                <a href="index.php?view_products" class="btn" style="margin:5px 0">View Products</a>
                 <a href="index.php?insert_categories" class="btn" style="margin:5px 0">Insert Categories</a>
                 <a href="" class="btn" style="margin:5px 0">View Categories</a>
                 <a href="index.php?insert_brands" class="btn" style="margin:5px 0">Insert Brands</a>
@@ -62,9 +62,6 @@
     }
     if(isset($_GET['insert_brands'])){
         include('insert-brands.php');
-    }
-    if(isset($_GET['view_products'])){
-        include('view_products.php');
     }
     if(isset($_GET['view_products'])){
         include('view_products.php');
