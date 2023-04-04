@@ -125,7 +125,7 @@
 		<tr>
 			<th colspan='2'></th>
 			<th>Total: $total $</th>
-			<th colspan='3'><button class='pay-button' onclick='pay()''>Pay</button>    <button class='pay-button' ><a href='users_area/checkout.php'>checkout</a></button></th>
+			<th colspan='3'><button class='pay-button' onclick='pay()''>Pay</button>    <button class='pay-button' ><a href='checkout.php'>checkout</a></button></th>
 		</tr>
 	</tfoot>
 	</table>";

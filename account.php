@@ -1,5 +1,10 @@
 <?php require_once "controllerUserData.php"; 
-include("./functions/common_functions.php")?>
+include("./functions/common_functions.php");
+if(isset($_SESSION['username'])){
+    echo"<script>window.open('profile.php','_self')</script>";
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,10 +56,10 @@ include("./functions/common_functions.php")?>
                         }
                         ?>
                         <div class="field">
-                        <input type="text" placeholder="Email Address" required>
+                        <input type="text" placeholder="Username" required name="user_username1">
                         </div>
                         <div class="field">
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" placeholder="Password" required name="user_password1">
                         </div>
                         <div class="pass-link">
                             <a href="#">Forgot password?</a>
@@ -122,6 +127,7 @@ include("./functions/common_functions.php")?>
 
 
 <?php
+session_start();
     if(isset($_POST['user_register'])){
         $user_username = $_POST['user_username'];
         $user_email = $_POST['user_email'];
@@ -154,6 +160,37 @@ include("./functions/common_functions.php")?>
         }else{
             die(mysqli_error($con));
         }
+        }
+    $select_cart_item="Select * from `cart_details` where ip_address = '$user_ip'";
+    $result_cart=mysqli_query($con,$select_cart_item);
+    $cr=mysqli_num_rows($result_cart);
+    if($cr>0){
+        $_SESSION['username']=$user_username;
+        echo"<script> alert('You have item in your cart')</script>";
+        echo"<script>window.open('checkout.php','_self')</script>";
+    }else{
+        echo"<script>window.open('index.php','_self')</script>";
     }
     } 
+
+    if(isset($_POST['signin'])){
+        $user_username1=$_POST['user_username1'];
+        $user_password1 = $_POST['user_password1'];
+        $select_user="Select * from `user_table` where username = '$user_username1'";
+        $result_user=mysqli_query($con,$select_user);
+        $row_data=mysqli_fetch_assoc($result_user);
+
+        $rcu=mysqli_num_rows($result_user);
+        if($rcu>0){
+            if(password_verify($user_password1,$row_data['user_password'])){
+                $_SESSION['username']=$user_username1;
+                echo"<script>window.open('profile.php','_self')</script>";
+            }else{
+                echo"<script> alert('user or password wrong')</script>";
+            }
+        }else{
+            echo"<script> alert('user or password wrong')</script>";
+        }
+
+    }
 ?>
