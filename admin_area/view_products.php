@@ -59,7 +59,7 @@
                 <td><img src='./product_images/<?php echo $product_image;?>'></td>
                 <td><?php echo $product_price;?></td>
                 <td><?php echo $status;?></td>
-                <td><a href=''><i class='fa-solid fa-pen-to-square' style='color: #fffff;'></i></a></td>
+                <td><a href='index.php?edit_products'><i class='fa-solid fa-pen-to-square' style='color: #fffff;'></i></a></td>
                 <td><a href=''><i class='fa-solid fa-trash' style='color: #ffffff;'></i></a></td>
                 <td><?php 
                     $get_count = "SELECT * From `orders_pending` where product_id = $product_id";
