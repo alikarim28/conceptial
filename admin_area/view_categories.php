@@ -1,4 +1,3 @@
-
 <?php
     include("../includes/connection.php");
 ?>
@@ -46,41 +45,25 @@
     <table>
         <thead>
         <tr>
-            <th>Product Id</th>
-            <th>Product title</th>
-            <th>Product image</th>
-            <th>Product Price</th>
-            <th>Status</th>
-            <th>Total Sold</th>
-            <th>edit</th>
+            <th>Slno</th>
+            <th>Category title</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
             <?php
-            $get_productss= " select * from `product` ";
-            $result = mysqli_query($con,$get_productss);
+            $get_categories= " select * from `categories` ";
+            $result = mysqli_query($con,$get_categories);
             while($rows = mysqli_fetch_assoc($result)){
-                $product_id = $rows['product_id'];
-                $product_title = $rows['product_title'];
-                $product_image1 = $rows['product_image1'];
-                $product_price = $rows['product_price'];
-                $status = $rows['status'];
-                $get_count = "SELECT * From `orders_pending` where product_id = $product_id";
-                $results = mysqli_query($con,$get_count);
-                $rows_count=mysqli_num_rows($results);
+                $category_id = $rows['category_id'];
+                $category_title = $rows['category_title'];
                 echo"
             <tr>
-                <td>$product_id</td>
-                <td>$product_title</td>
-                <td><img src='./product_images/$product_image1' class='product_img'></td>
-                <td>$product_price</td>
-                <td>$status</td>
-                <td>
-                $rows_count           
-                </td>
-                <td><a href='index.php?edit_products=$product_id'><i class='fa-solid fa-pen-to-square' style='color: #000;'></i></a></td>
-                <td><a href='index.php?delete_products=$product_id'><i class='fa-solid fa-trash' style='color: #000000;'></i></a></td>
+                <td>$category_id</td>
+                <td>$category_title</td>
+                <td><a href='index.php?edit_category=$category_id'><i class='fa-solid fa-pen-to-square' style='color: #000;'></i></a></td>
+                <td><a href='index.php?delete_category=$category_id'><i class='fa-solid fa-trash' style='color: #000000;'></i></a></td>
                 
             </tr>";
         }

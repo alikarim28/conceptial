@@ -43,9 +43,9 @@
                 <a href="insert_product.php" class="btn" style="margin:5px 0">Insert Products</a>
                 <a href="index.php?view_products" class="btn" style="margin:5px 0">View Products</a>
                 <a href="index.php?insert_categories" class="btn" style="margin:5px 0">Insert Categories</a>
-                <a href="" class="btn" style="margin:5px 0">View Categories</a>
+                <a href="index.php?view_categories" class="btn" style="margin:5px 0">View Categories</a>
                 <a href="index.php?insert_brands" class="btn" style="margin:5px 0">Insert Brands</a>
-                <a href="" class="btn" style="margin:5px 0">View Brands</a>
+                <a href="index.php?view_brands" class="btn" style="margin:5px 0">View Brands</a>
                 <a href="" class="btn" style="margin:5px 0">All Orders</a>
                 <a href="" class="btn" style="margin:5px 0">All Payments</a>
                 <a href="" class="btn" style="margin:5px 0">List Users</a>
@@ -71,6 +71,24 @@
     }
     if(isset($_GET['delete_products'])){
         include('delete_products.php');
+    }
+    if(isset($_GET['view_categories'])){
+        include('view_categories.php');
+    }
+    if(isset($_GET['view_brands'])){
+        include('view_brands.php');
+    }
+    if(isset($_GET['edit_category'])){
+        include('edit_categories.php');
+    }
+    if(isset($_GET['edit_brand'])){
+        include('edit_brands.php');
+    }
+    if(isset($_GET['delete_brand'])){
+        include('delete_brand.php');
+    }
+    if(isset($_GET['delete_category'])){
+        include('delete_category.php');
     }
     ?>
 </div>
