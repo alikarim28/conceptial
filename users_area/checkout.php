@@ -1,6 +1,6 @@
 <?php
-	require('includes/connection.php');
-	 include("functions/common_functions.php");
+    require "./includes/connection.php";
+	// require("functions/common_functions.php");
 ?>
 
 <!DOCTYPE html>

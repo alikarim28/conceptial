@@ -1,11 +1,22 @@
 <?php
 	require('includes/connection.php');
-	 include("functions/common_functions.php");
+	include("functions/common_functions.php");
 ?>
 <?php
-	if(isset($_POST['remove'])){
-		$cart=$_POST['cart_id'];
+	foreach($_POST as $key => $value) {
+		if(strpos($key, 'value_') === 0) {
+			$cart_id = substr($key, 6);
+			$quantity = $value;
+			$query = "UPDATE `cart_details` SET quantity='$quantity' WHERE cart_id='$cart_id'";
+			mysqli_query($con, $query);
+		}
+		if(strpos($key, 'remove_') === 0) {
+			$cart_id = substr($key, 7);
+			$query = "DELETE FROM `cart_details` WHERE cart_id='$cart_id'";
+			mysqli_query($con, $query);
+		}
 	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -60,8 +71,15 @@
         <p>Save more by buying online</p>
 	</div>
 	<form action="" method="POST" enctype="multipart/form-data">
-	
-	<div class="container">
+		<?php
+			global $con;
+			$ip=getIPAddress();
+			$total=0;
+			$cart_query="select * from `cart_details` where ip_address='$ip'";
+			$result_query=mysqli_query($con,$cart_query);
+			$nb_count=mysqli_num_rows($result_query);
+			if($nb_count>0){
+		echo"
     <table>
 	  <thead>
 	    <tr>
@@ -74,13 +92,8 @@
 	    </tr>
 	  </thead>
 
-	  <tbody>
-		<?php 
-			global $con;
-			$ip=getIPAddress();
-			$total=0;
-			$cart_query="select * from `cart_details` where ip_address='$ip'";
-			$result_query=mysqli_query($con,$cart_query);
+	  <tbody>";
+			
 			while($row=mysqli_fetch_array($result_query)){
 				$cart_id=$row['cart_id'];
 				$product_id=$row['product_id'];
@@ -95,28 +108,32 @@
 				
 		?>
 	    <tr>
-		<input type="hidden" name="cart_id" value='<?php echo"$cart_id"?>'>
+		<input type="hidden" name="cart_id_<?php echo"$cart_id"?>" value='<?php echo"$cart_id"?>'>
 	      <td><?php echo"$product_name" ?></td>
 	      <td><?php echo"$size" ?></td>
 	      <td><?php echo"$product_price" ?>$</td>
 	      <td>  <?php echo"$quantity" ?></td>
-	      <td><input type="number" name="value" id="value" value='<?php echo"$quantity"?>'>      <input type="submit" name="update_quantity" value="update quantity <?php echo"$cart_id"?>"></td>
-	      <td><input type="submit" name="remove" value="remove <?php echo"$cart_id"?>"></td>
+	      <td><input type="number" name="value_<?php echo"$cart_id"?>" id="value" value='<?php echo"$quantity"?>'>      <input type="submit" name="update_quantity_<?php echo"$cart_id"?>" value="update quantity"></td>
+	      <td><input type="submit" name="remove_<?php echo"$cart_id"?>" value="remove"></td>
 	    </tr>
 	    <?php 
 			}
 		}
-		?>
-	  </tbody>
+		
+	  echo "</tbody>
 	  <tfoot>
 		<tr>
-			<th colspan="2"></th>
-			<th>Total: <?php echo"$total"?>$</th>
-			<th colspan="3"><button class="pay-button" onclick="pay()">Pay</button></th>
+			<th colspan='2'></th>
+			<th>Total: $total $</th>
+			<th colspan='3'><button class='pay-button' onclick='pay()''>Pay</button>    <button class='pay-button' ><a href='users_area/checkout.php'>checkout</a></button></th>
 		</tr>
 	</tfoot>
-	</table>
-	</div>
+	</table>";
+			}
+	else{
+		echo"<h2>Your cart is empty</h2>";
+	}
+	?>
 	</form>
 	<?php
 		require "components/brand.php";
