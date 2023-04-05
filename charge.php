@@ -1,12 +1,17 @@
 <?php 
     require('includes/connection.php');
     include("functions/common_functions.php");
-    if(isset($_GET['user_id'])){
-    $user_id=$_GET['user_id'];
+    session_start();
+    if(isset($_SESSION['username'])){
+    $username=$_SESSION['username'];
     global $con;
     $ip=getIPAddress();
     $total=0;
     $cart_query="select * from `cart_details` where ip_address='$ip'";
+    $id_querry="select * from `user_table` where username='$username'";
+    $result_id=mysqli_query($con,$id_querry);
+    $row_id=mysqli_fetch_array($result_id);
+    $user_id=$row_id['user_id'];
     $result_query=mysqli_query($con,$cart_query);
     $nb_count=mysqli_num_rows($result_query);
     if($nb_count>0){

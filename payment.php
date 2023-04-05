@@ -71,15 +71,7 @@ button:hover {
   <input type="text" name="name" placeholder="Name">
   <input type="text" name="email" placeholder="Email">
   <input type="text" name="amount" placeholder="Amount">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="YOUR_PUBLIC_KEY_HERE"
-    data-amount="1000"
-    data-name="Your Website Name"
-    data-description="Payment"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-currency="usd"
-  ></script>
+  <input type='submit'>
 </form>
 	
     

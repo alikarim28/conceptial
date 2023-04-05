@@ -24,6 +24,23 @@
 	<title>Conceptial | S T R E E T W E A R </title>
 	<link rel = "icon" href ="images/icon-1.png" type = "image/x-icon" >
     <style>
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 20px 0;
+		}
+		th, td {
+			padding: 10px;
+			text-align: left;
+			border: 1px solid #ddd;
+		}
+		th {
+			background-color: #f2f2f2;
+			color: #555;
+		}
+		tr:hover {
+			background-color: #f5f5f5;
+		}
 		.buttons {
   display: flex;
   justify-content: center;
@@ -73,12 +90,58 @@ button:hover {
   
 </form>
 
-
-
-
+	
 
 <h3 class ="text-center">All my orders</h3>
+<?php
+			global $con;
+			$id_querry="select * from `user_table` where username='$user'";
+			$result_id=mysqli_query($con,$id_querry);
+			$row_id=mysqli_fetch_array($result_id);
+			$user_id=$row_id['user_id'];
+			$queryy="select * from `user_orders` where user_id='$user_id'";
+			$result=mysqli_query($con,$queryy);
+			$nb_count=mysqli_num_rows($result);
+			if($nb_count>0){
+		echo"
+    <table>
+	  <thead>
+	    <tr>
+	      <th>amount_due </th>
+	      <th>invoice_number	</th>
+	      <th>total_products</th>
+	      <th>order_date	</th>
+	      <th>order_status</th>
+	    </tr>
+	  </thead>
 
+	  <tbody>";
+			
+			while($row=mysqli_fetch_array($result)){
+				$amount_due=$row['amount_due'];
+				$invoice_number=$row['invoice_number'];
+				$total_products=$row['total_products'];
+				$order_date=$row['order_date'];
+				$order_status=$row['order_status'];
+				
+		?>
+	    <tr>
+		<input type="hidden" name="cart_id_<?php echo"$cart_id"?>" value='<?php echo"$cart_id"?>'>
+	      <td><?php echo"$amount_due" ?>$</td>
+	      <td><?php echo"$invoice_number" ?></td>
+	      <td><?php echo"$total_products" ?></td>
+	      <td>  <?php echo"$order_date" ?></td>
+		  <td>  <?php echo"$order_status" ?></td>
+	     
+	    </tr>
+	    <?php 
+			}
+		
+		
+	  echo "</tbody>
+	</table>";
+			}	
+	?>
 	<?php
 		require "components/brand.php";
 		require "components/footer.php";
