@@ -29,6 +29,9 @@
         $total+=$product_price*$quantity;
         $product_name=$row_product['product_title'];
       }
+      $insert_query_pending="insert into `orders_pending` (user_id,invoice_number,product_id,quantity,size,order_status) values 
+    ($user_id,$invoice_number,$product_id,$quantity,'$size','$status')";
+    $result_4=mysqli_query($con,$insert_query_pending);
     }
     $insert_query="insert into `user_orders` (user_id,amount_due,invoice_number,total_products,order_date,order_status) values 
     ($user_id,$total,$invoice_number,$nb_count,NOW(),'$status')";
