@@ -150,3 +150,50 @@ button:hover {
 </body>
 
 </html>
+<?php
+			global $con;
+			$queryy="select * from `orders_pending`";
+			$result=mysqli_query($con,$queryy);
+			$nb_count=mysqli_num_rows($result);
+			if($nb_count>0){
+		echo"
+    <table>
+	  <thead>
+	    <tr>
+	      <th>user_id </th>
+	      <th>invoice_number</th>
+	      <th>product_id</th>
+	      <th>quantity	</th>
+		  <th>size</th>
+	      <th>order_status</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>";
+			
+			while($row=mysqli_fetch_array($result)){
+				$user_id=$row['user_id'];
+				$invoice_number=$row['invoice_number'];
+				$product_id=$row['product_id'];
+				$quantity=$row['quantity'];
+				$size=$row['size'];
+				$order_status=$row['order_status'];
+				
+		?>
+	    <tr>
+		<input type="hidden" name="cart_id_<?php echo"$cart_id"?>" value='<?php echo"$cart_id"?>'>
+	      <td><?php echo"$user_id" ?>$</td>
+	      <td><?php echo"$invoice_number" ?></td>
+	      <td><?php echo"$product_id" ?></td>
+	      <td>  <?php echo"$quantity" ?></td>
+		  <td>  <?php echo"$size" ?></td>
+		  <td>  <?php echo"$order_status" ?></td>
+	    </tr>
+	    <?php 
+			}
+		
+		
+	  echo "</tbody>
+	</table>";
+			}	
+	?>

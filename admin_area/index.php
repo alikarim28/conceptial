@@ -46,7 +46,7 @@
                 <a href="index.php?view_categories" class="btn" style="margin:5px 0">View Categories</a>
                 <a href="index.php?insert_brands" class="btn" style="margin:5px 0">Insert Brands</a>
                 <a href="index.php?view_brands" class="btn" style="margin:5px 0">View Brands</a>
-                <a href="" class="btn" style="margin:5px 0">All Orders</a>
+                <a href="index.php?view_orders" class="btn" style="margin:5px 0">All Orders</a>
                 <a href="" class="btn" style="margin:5px 0">All Payments</a>
                 <a href="" class="btn" style="margin:5px 0">List Users</a>
                 <a href="" class="btn" style="margin:5px 0">Logout</a>
@@ -89,6 +89,11 @@
     }
     if(isset($_GET['delete_category'])){
         include('delete_category.php');
+    }
+    if(isset($_GET['view_orders'])){
+        include('view_orders.php');
+    }if(isset($_GET['edit_status'])){
+        include('edit_status.php');
     }
     ?>
 </div>
